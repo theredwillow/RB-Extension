@@ -41,6 +41,7 @@ function displayWarning(errorCode, situationalData, time) {
 }
 
 function sendPhone(providedString) {
+    //var numOfSlashes = document.getElementById("QQQ").value.match(/\-/g).length;
     document.getElementById("QQQ").value = providedString
         .replace(/zero/gi, '0')
         .replace(/one|juan|won/gi, '1')
@@ -61,10 +62,16 @@ function sendPhone(providedString) {
         .match(/(\d{0,3})(\d{0,3})(\d{0,4})/).slice(1).join('-')
         .replace(/-*$/g, '')
     ;
+    //numOfSlashes = numOfSlashes - document.getElementById("QQQ").value.match(/\-/g).length;
+    //start = start + numOfSlashesAdded;
+    //end = end + numOfSlashesAdded;
     var phone = document.getElementById("QQQ").value.split('-');
     document.getElementById('phone1').value = phone[0] || "";
     document.getElementById('phone2').value = phone[1] || "";
     document.getElementById('phone3').value = phone[2] || "";
+    if( document.getElementById("QQQ").value.length == 12 ){
+        $("button:contains('Search')").click();
+    }
 }
 
 function getTheDate(tense='present') {
@@ -128,6 +135,8 @@ if( getQueryVariable("phone") ) {
     $("button:contains('Search')").click();
 }
 
+var start;
+var end;
 $("#QQQ").on('keyup paste input', function(e){
     switch( e.type ) {
         case 'keyup':
@@ -146,8 +155,8 @@ $("#QQQ").on('keyup paste input', function(e){
         break;
 
         default:
-            var start = this.selectionStart,
-                end = this.selectionEnd;
+            start = this.selectionStart;
+            end = this.selectionEnd;
             sendPhone( this.value );
             this.setSelectionRange(start, end);
     }
@@ -237,7 +246,7 @@ function checkPhoneNotes() {
                 return inputArray.indexOf(item) == index;
             }
         );
-        URLsInNotes = URLsInNotes.map(function(x){ return x.toUpperCase() });
+        URLsInNotes = URLsInNotes.map(function(x){ return x.toUpperCase(); });
         // .replace("s://hotpads.com/", "<img src=\'/images/hotpads.png\'>")
     }
     else if ( checkCount==10 ) {
