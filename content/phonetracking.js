@@ -176,6 +176,16 @@ $("button:contains('Search')").on('click', function() {
     waitForNotes = setInterval( function() { checkPhoneNotes() }, 500);
 });
 
+var getLetter = function(href) {
+    if( !/^http/i.test(href) ) { return href; }
+    var l = document.createElement("a");
+    l.href = href;
+    l = l.hostname;
+    var re = new RegExp(".*" + l + "\/", "i");
+    if(l.match(/\./g).length > 1) { l = l.replace(/.*?\./i, ""); }
+    return l[0].toUpperCase() + ": " + href.replace(re, "");
+};
+
 $("#comments_box").on('input', function(e){
     var strLength = this.value.length;
     $('#autoOptions').html("");
@@ -187,7 +197,7 @@ $("#comments_box").on('input', function(e){
         while(i > -2) {
             if( predictions[key].indexOf(testStr) < 0 ) { break; } // No chance of matching
             if( predictions[key].startsWith(testStr) && testStr != predictions[key] ) {
-                $('#autoOptions').append( $("<button>").text( predictions[key].replace(/s\:\/\/hotpads.com\//gi, "<img src=\'/images/hotpads.png\'>") )
+                $('#autoOptions').append( $("<button>").text( getLetter(predictions[key]) )
                     .attr('onclick', "addNote(\'" + predictions[key] + "\');")
                     .css({ "background-color": "#b3b3ff", "padding": "3px 3px", "font-size": "10px" })
                 );
