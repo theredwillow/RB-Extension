@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+
+  "name": "Rental Beast Extension",
+  "description": "This extension will eventually help entry listing specialists do almost every part of their job: sourcing, entering, and updating in both PO and MC.",
+  "version": "0.0.1",
+
+  "permissions": [
+    "storage"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "browser_action": {
+      //"default_title": "Set this page's color.",
+      //"default_icon": "icon.png",
+      "default_popup": "/pages/popup.html"
+  },
+
+  "content_scripts": [
+  {
+    "run_at": "document_idle",
+    "matches": ["*://*.zillow.com/*"],
+    "js": ["/tools/sourcing.js", "/content/zillow.js"]
+  },
+  {
+    "run_at": "document_idle",
+    "matches": ["*://*.hotpads.com/*"],
+    "js": ["/tools/sourcing.js", "/content/hotpads.js"]
+  },
+  {
+    "run_at": "document_idle",
+    "matches": ["*://*.craigslist.org/*"],
+    "js": ["/tools/sourcing.js", "/content/craigslist.js"]
+  }
+  ]
+}

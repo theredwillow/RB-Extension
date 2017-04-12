@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+
+  "name": "Rental Beast Extension",
+  "description": "This extension will eventually help entry listing specialists do almost every part of their job: sourcing, entering, and updating in both PO and MC.",
+  "version": "0.1.0",
+
+  "permissions": [
+    "activeTab",
+    "http://be.rentalbeast.com/",
+    "storage"
+  ],
+
+  "web_accessible_resources": [
+    "/content/*"
+  ],
+
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": ["*://*.zillow.com/homes/for_rent/*"],
+      "js": ["/jquery-3.2.0.slim.min.js", "/arrive.min.js", "/content/zillow.js"]
+    },
+   {
+      "run_at": "document_idle",
+      "matches": ["http://be.rentalbeast.com/*"],
+      "js": ["/jquery-3.2.0.slim.min.js", "/arrive.min.js", "/content/injector.js", "/content/phonetracking.js"]
+   }
+  ]
+}
