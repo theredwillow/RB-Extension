@@ -23,8 +23,13 @@
     },
    {
       "run_at": "document_idle",
-      "matches": ["http://be.rentalbeast.com/*"],
+      "matches": ["*://be.rentalbeast.com/phone-tracking"],
       "js": ["/jquery-3.2.0.slim.min.js", "/arrive.min.js", "/content/injector.js", "/content/phonetracking.js"]
-   }
+   },
+    {
+      "run_at": "document_idle",
+      "matches": ["*://be.rentalbeast.com/sl-listings"],
+      "js": ["/jquery-3.2.0.slim.min.js", "/arrive.min.js", "/content/injector.js", "/content/starlord.js"]
+    }
   ]
 }

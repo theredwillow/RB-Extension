@@ -10,7 +10,11 @@ function injectWhat(){
 	    case "/phone-tracking":
 	        injectJs( chrome.extension.getURL("/content/phonetracking.js") );
 	        break;
+	    case "/sl-listings":
+	        injectJs( chrome.extension.getURL("/content/starlord.js") );
+	        break;
 	    default:
+	    	// This is where you'll put the misc scraper (kmHelper.js)
 	    	console.log("No injection code was specified for this url.");
 	}
 }
