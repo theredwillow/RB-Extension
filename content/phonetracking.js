@@ -28,6 +28,8 @@ hidWarning.append( $('<span>').attr({'id': 'warning'}).css("font-size", "11px") 
 hidWarning.append( $('<span>').attr({'id': 'clipboard'}).css("font-size", "9px") );
 $("tr:has(#phone1)").eq(1).append(hidWarning);
 
+var initials = $('.welcome').text().replace(/welcome,\s|log\sout/gi, "").match(/[A-Z]/g).join("");
+
 function displayWarning(errorCode, situationalData, time) {
     $("#warning").eq(0).text(errorCode);
     if(situationalData) { $("#clipboard").eq(0).text( '\"' + situationalData + '\"' ); }
@@ -69,7 +71,7 @@ function sendPhone(providedString) {
     document.getElementById('phone1').value = phone[0] || "";
     document.getElementById('phone2').value = phone[1] || "";
     document.getElementById('phone3').value = phone[2] || "";
-    if( document.getElementById("QQQ").value.length == 12 ){
+    if( document.getElementById("QQQ").value.length == 12 ){ // PERHAPS ADD AN OPTION TO TURN THIS FEATURE OFF
         $("button:contains('Search')").click();
     }
 }
@@ -99,7 +101,7 @@ function addNote(textAdded) {
         }
         testStr = commentsBox.value.substring(i++, strLength);
     }
-    commentsBox.value += textAdded + ". ";
+    commentsBox.value += textAdded + ". " + initials + ".";
     if( textAdded.indexOf("PERMISSION") > -1 ) {
         displayWarning('Date and status were changed.', null, 1.5);
         $('#dd_Options').val(4);
