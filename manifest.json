@@ -1,35 +1,30 @@
 {
+  "name": "Scraper Maker",
+  "description": "This is a tool that helps non-programmers create RB scrapers.",
+  "version": "0.1",
   "manifest_version": 2,
-
-  "name": "Rental Beast Extension",
-  "description": "This extension will eventually help entry listing specialists do almost every part of their job: sourcing, entering, and updating in both PO and MC.",
-  "version": "0.1.0",
-
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "browser_action": {
+      "default_title": "Scraper Maker" //,
+      // "default_icon": "icon.png",
+      // "default_popup": "popup.html"
+  },
   "permissions": [
     "activeTab",
-    "http://be.rentalbeast.com/",
-    "storage"
+    "<all_urls>"
   ],
-
-  "web_accessible_resources": [
-    "/content/*"
-  ],
-
-  "content_scripts": [
-    {
-      "run_at": "document_idle",
-      "matches": ["*://*.zillow.com/homes/for_rent/*"],
-      "js": ["/jquery-3.2.0.slim.min.js", "/arrive.min.js", "/content/zillow.js"]
-    },
-   {
-      "run_at": "document_idle",
-      "matches": ["*://be.rentalbeast.com/phone-tracking"],
-      "js": ["/jquery-3.2.0.slim.min.js", "/arrive.min.js", "/content/injector.js", "/content/phonetracking.js"]
-   },
-    {
-      "run_at": "document_idle",
-      "matches": ["*://be.rentalbeast.com/sl-listings*"],
-      "js": ["/jquery-3.2.0.slim.min.js", "/arrive.min.js", "/content/injector.js", "/content/starlord.js"]
-    }
-  ]
+  "content_scripts": [{
+      "run_at": "document_end",
+      "matches": [
+          "https://*/*",
+          "http://*/*"
+      ],
+      "js": ["jquery-3.2.1.slim.min.js", "content.js"]
+  }],
+  // "web_accessible_resources": ["popup.html"],
+  "background": {
+    "scripts":["background.js"]
+  }
 }
